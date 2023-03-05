@@ -1,19 +1,29 @@
-< <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
   <head>
-    <<meta charset="utf-8">
-    <<meta name="author" content="Lance Giles">
+    <meta charset="utf-8">
+    <meta name="author" content="Lance Giles">
     <meta name="description" content="step sequencer and synthesizer">
     <link rel="stylesheet" href="style.css" />
     <title>Slaps</title>
   </head>
 
   <body>
+
+    <div id="volume-control">
+      <input type="range" min="0" max="2" value="1" step="0.01" data-action="volume">
+      <datalist id="gain-vals">
+        <option value="0" label="min">
+        <option value="2" label="max">
+      </datalist>
+      <label for="volume">volume</label>
+    </div>
+
 <!-- start small and expand
 1. an on/off button for an oscillator
 -->
-
+<button id="osc1" class="oscillator">one</button>
 <!--
 2. expand to two buttons for the same oscillator to extend
 -->
