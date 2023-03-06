@@ -1,5 +1,5 @@
-console.clear();
-
+//console.clear();
+/*
 //setup
 const AudioContext = window.AudioContext || window.webkitAudioContext;
 const audioCtx = new AudioContext();
@@ -11,13 +11,34 @@ volumeControl.addEventListener('input', function() {
 	gainNode.gain.value = this.value;
 }, false);
 
+*/
+//buttons
+
+const db = document.getElementById('db');
+const onoff = ['salmon', 'white'];
+
+db.addEventListener('click', function onClick() {
+  db.style.backgroundColor = onoff[index];
+  index = index >= onoff.length - 1 ? 0 : index + 1;
+});
+
+
+
+
+
+
+
+/*
+
+
+
 // A minor pentatonic scale
-const A3 = 220;
-const C4 = 261.63;
-const D4 = 293.66;
-const E4 = 329.63;
-const G4 = 392;
-const A4 = 440;
+const root-pitch = 220;
+const third-pitch = 261.63;
+const fourth-pitch = 293.66;
+const fifth-pitch = 329.63;
+const seventh-pitch = 392;
+const octave-pitch = 440;
 
 
 const osc1 = audioCont.createOscillator();
@@ -51,3 +72,4 @@ if (osc1_button.addEventListener)
     osc1_button.addEventListener("click", osc1.start(), false);
 else if (osc1_button.attachEvent)
     osc1_button.attachEvent('onclick', osc1.start();
+*/

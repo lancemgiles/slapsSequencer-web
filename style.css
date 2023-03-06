@@ -1,5 +1,18 @@
 #volume-control {
 	display: grid;
 	justify-items: center;
-	
+}
+
+
+.row {
+    
+}
+
+.note {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    display: inline-block;
+    background-color: white;
+    border: solid salmon 5px;
 }
