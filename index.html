@@ -6,27 +6,252 @@
     <meta name="author" content="Lance Giles">
     <meta name="description" content="step sequencer and synthesizer">
     <link rel="stylesheet" href="style.css" />
-    <title>Slaps</title>
+    <title>Slaps - Step Sequencer</title>
+    <meta name="description" content="A simple instrument for web browsers" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   </head>
 
   <body>
+    <section id="controls">
+      <div id="sliders">
+        <div id="volume-control">
+          <label for="volume">volume</label>
+          <input type="range" min="0" max="2" value="1" step="0.01" data-action="volume">
+          <datalist id="gain-vals">
+            <option value="0" label="min">
+            <option value="2" label="max">
+          </datalist>
+        </div>
+        <div id="bpm-control">
+          <label for="bpm">BPM</label>
+          <input name="bpm" id="bpm" type="range" min="60" max="180" value="120" step="1" />
+       </div>
+      </div>
+      <div id="play-button">  
+        <label for="playBtn" class="container">play
+          <input type="checkbox" id="playBtn" />
+          <span class="checkmark"></span>
+        </label>
+      </div>
+  </section>
 
-    <div id="volume-control">
-      <label for="volume">volume</label>
-      <input type="range" min="0" max="2" value="1" step="0.01" data-action="volume">
-      <datalist id="gain-vals">
-        <option value="0" label="min">
-        <option value="2" label="max">
-      </datalist>
-    </div>
+	<section id="row-one">
+		<section class="pads">
+      <label for="v1n1" class="container"><p>Voice 1, Note 1</p>
+        <input type="checkbox" id="v1n1" />
+        <span class="checkmark"></span>
+      </label>
+			<label for="v1n2" class="container"><p>Voice 1, Note 2</p>
+        <input type="checkbox" id="v1n2" />
+        <span class="checkmark"></span>
+      </label>
+			<label for="v1n3" class="container"><p>Voice 1, Note 3</p>
+        <input type="checkbox" id="v1n3" />
+        <span class="checkmark"></span>
+      </label>
+			<label for="v1n4" class="container"><p>Voice 1, Note 4</p>
+        <input type="checkbox" id="v1n4" />
+        <span class="checkmark"></span>
+      </label>
+      <label for="v1n5" class="container"><p>Voice 1, Note 5</p>
+        <input type="checkbox" id="v1n5" />
+        <span class="checkmark"></span>
+      </label>
+			<label for="v1n6" class="container"><p>Voice 1, Note 6</p>
+        <input type="checkbox" id="v1n6" />
+        <span class="checkmark"></span>
+      </label>
+			<label for="v1n7" class="container"><p>Voice 1, Note 7</p>
+        <input type="checkbox" id="v1n7" />
+        <span class="checkmark"></span>
+      </label>
+			<label for="v1n8" class="container"><p>Voice 1, Note 8</p>
+        <input type="checkbox" id="v1n8" />
+        <span class="checkmark"></span>
+      </label>
+    </section>
+  </section>
 
-<div class="row root-pitch">
-    <button class="note" id="db"></button>
-    <button class="note upbeat-one"></button>
-    <button class="note downbeat-two"></button>
-    <button class="note upbeat-two"></button>
-</div>
-
-<script src="script.js"></script>
+  <section id="row-two">
+    <section class="pads">
+      <label for="v2n1" class="container"><p>Voice 2, Note 1</p>
+        <input type="checkbox" id="v2n1" />
+        <span class="checkmark"></span>
+      </label>
+      <label for="v2n2" class="container"><p>Voice 2, Note 2</p>
+        <input type="checkbox" id="v2n2" />
+        <span class="checkmark"></span>
+      </label>
+      <label for="v2n3" class="container"><p>Voice 2, Note 3</p>
+        <input type="checkbox" id="v2n3" />
+        <span class="checkmark"></span>
+      </label>
+      <label for="v2n4" class="container"><p>Voice 2, Note 4</p>
+        <input type="checkbox" id="v2n4" />
+        <span class="checkmark"></span>
+      </label>
+      <label for="v2n5" class="container"><p>Voice 2, Note 5</p>
+        <input type="checkbox" id="v2n5" />
+        <span class="checkmark"></span>
+      </label>
+      <label for="v2n6" class="container"><p>Voice 2, Note 6</p>
+        <input type="checkbox" id="v2n6" />
+        <span class="checkmark"></span>
+      </label>
+      <label for="v2n7" class="container"><p>Voice 2, Note 7</p>
+        <input type="checkbox" id="v2n7" />
+        <span class="checkmark"></span>
+      </label>
+      <label for="v2n8" class="container"><p>Voice 2, Note 8</p>
+        <input type="checkbox" id="v2n8" />
+        <span class="checkmark"></span>
+      </label>
+    </section>
+  </section>
+  <section id="row-three">
+    <section class="pads">
+      <label for="v3n1" class="container"><p>Voice 3, Note 1</p>
+        <input type="checkbox" id="v3n1" />
+        <span class="checkmark"></span>
+      </label>
+      <label for="v3n2" class="container"><p>Voice 3, Note 2</p>
+        <input type="checkbox" id="v3n2" />
+        <span class="checkmark"></span>
+      </label>
+      <label for="v3n3" class="container"><p>Voice 3, Note 3</p>
+        <input type="checkbox" id="v3n3" />
+        <span class="checkmark"></span>
+      </label>
+      <label for="v3n4" class="container"><p>Voice 3, Note 4</p>
+        <input type="checkbox" id="v3n4" />
+        <span class="checkmark"></span>
+      </label>
+      <label for="v3n5" class="container"><p>Voice 3, Note 5</p>
+        <input type="checkbox" id="v3n5" />
+        <span class="checkmark"></span>
+      </label>
+      <label for="v3n6" class="container"><p>Voice 3, Note 6</p>
+        <input type="checkbox" id="v3n6" />
+        <span class="checkmark"></span>
+      </label>
+      <label for="v3n7" class="container"><p>Voice 3, Note 7</p>
+        <input type="checkbox" id="v3n7" />
+        <span class="checkmark"></span>
+      </label>
+      <label for="v3n8" class="container"><p>Voice 3, Note 8</p>
+        <input type="checkbox" id="v3n8" />
+        <span class="checkmark"></span>
+      </label>
+    </section>
+  </section>
+  <section id="row-four">
+    <section class="pads">
+      <label for="v4n1" class="container"><p>Voice 4, Note 1</p>
+        <input type="checkbox" id="v4n1" />
+        <span class="checkmark"></span>
+      </label>
+      <label for="v4n2" class="container"><p>Voice 4, Note 2</p>
+        <input type="checkbox" id="v4n2" />
+        <span class="checkmark"></span>
+      </label>
+      <label for="v4n3" class="container"><p>Voice 4, Note 3</p>
+        <input type="checkbox" id="v4n3" />
+        <span class="checkmark"></span>
+      </label>
+      <label for="v4n4" class="container"><p>Voice 4, Note 4</p>
+        <input type="checkbox" id="v4n4" />
+        <span class="checkmark"></span>
+      </label>
+      <label for="v4n5" class="container"><p>Voice 4, Note 5</p>
+        <input type="checkbox" id="v4n5" />
+        <span class="checkmark"></span>
+      </label>
+      <label for="v4n6" class="container"><p>Voice 4, Note 6</p>
+        <input type="checkbox" id="v4n6" />
+        <span class="checkmark"></span>
+      </label>
+      <label for="v4n7" class="container"><p>Voice 4, Note 7</p>
+        <input type="checkbox" id="v4n7" />
+        <span class="checkmark"></span>
+      </label>
+      <label for="v4n8" class="container"><p>Voice 4, Note 8</p>
+        <input type="checkbox" id="v4n8" />
+        <span class="checkmark"></span>
+      </label>
+    </section>
+  </section>
+  <section id="row-five">
+    <section class="pads">
+      <label for="v5n1" class="container"><p>Voice 5, Note 1</p>
+        <input type="checkbox" id="v5n1" />
+        <span class="checkmark"></span>
+      </label>
+      <label for="v5n2" class="container"><p>Voice 5, Note 2</p>
+        <input type="checkbox" id="v5n2" />
+        <span class="checkmark"></span>
+      </label>
+      <label for="v5n3" class="container"><p>Voice 5, Note 3</p>
+        <input type="checkbox" id="v5n3" />
+        <span class="checkmark"></span>
+      </label>
+      <label for="v5n4" class="container"><p>Voice 5, Note 4</p>
+        <input type="checkbox" id="v5n4" />
+        <span class="checkmark"></span>
+      </label>
+      <label for="v5n5" class="container"><p>Voice 5, Note 5</p>
+        <input type="checkbox" id="v5n5" />
+        <span class="checkmark"></span>
+      </label>
+      <label for="v5n6" class="container"><p>Voice 5, Note 6</p>
+        <input type="checkbox" id="v5n6" />
+        <span class="checkmark"></span>
+      </label>
+      <label for="v5n7" class="container"><p>Voice 5, Note 7</p>
+        <input type="checkbox" id="v5n7" />
+        <span class="checkmark"></span>
+      </label>
+      <label for="v5n8" class="container"><p>Voice 5, Note 8</p>
+        <input type="checkbox" id="v5n8" />
+        <span class="checkmark"></span>
+      </label>
+    </section>
+  </section>
+  <section id="row-six">
+    <section class="pads">
+      <label for="v6n1" class="container"><p>Voice 6, Note 1</p>
+        <input type="checkbox" id="v6n1" />
+        <span class="checkmark"></span>
+      </label>
+      <label for="v6n2" class="container"><p>Voice 6, Note 2</p>
+        <input type="checkbox" id="v6n2" />
+        <span class="checkmark"></span>
+      </label>
+      <label for="v6n3" class="container"><p>Voice 6, Note 3</p>
+        <input type="checkbox" id="v6n3" />
+        <span class="checkmark"></span>
+      </label>
+      <label for="v6n4" class="container"><p>Voice 6, Note 4</p>
+        <input type="checkbox" id="v6n4" />
+        <span class="checkmark"></span>
+      </label>
+      <label for="v6n5" class="container"><p>Voice 6, Note 5</p>
+        <input type="checkbox" id="v6n5" />
+        <span class="checkmark"></span>
+      </label>
+      <label for="v6n6" class="container"><p>Voice 6, Note 6</p>
+        <input type="checkbox" id="v6n6" />
+        <span class="checkmark"></span>
+      </label>
+      <label for="v6n7" class="container"><p>Voice 6, Note 7</p>
+        <input type="checkbox" id="v6n7" />
+        <span class="checkmark"></span>
+      </label>
+      <label for="v6n8" class="container"><p>Voice 6, Note 8</p>
+        <input type="checkbox" id="v6n8" />
+        <span class="checkmark"></span>
+      </label>
+    </section>
+  </section>
+    <script src="script.js"></script>
   </body>
 </html>

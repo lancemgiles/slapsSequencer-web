@@ -1,5 +1,5 @@
-//console.clear();
-/*
+console.clear();
+
 //setup
 const AudioContext = window.AudioContext || window.webkitAudioContext;
 const audioCtx = new AudioContext();
@@ -11,65 +11,230 @@ volumeControl.addEventListener('input', function() {
 	gainNode.gain.value = this.value;
 }, false);
 
-*/
+
 //buttons
+/*
+ theses should:
+ * change color when clicked,
+ * turn that interval on or off in the sequence
+ * when that part of the sequence is reached, remove the border if the sequencer is on
 
-const db = document.getElementById('db');
-const onoff = ['salmon', 'white'];
+ * so
+ * there should be a function either for every note or each kind of beat that just changes the color of the button clicked
+ * another function that turns on that beat of the sequencer on for the oscillator row the button is in
+ * another function that is applied to every on button when the sequencer plays that note for the animation
 
-db.addEventListener('click', function onClick() {
-  db.style.backgroundColor = onoff[index];
-  index = index >= onoff.length - 1 ? 0 : index + 1;
-});
+ */
+
+// A minor pentatonic scale
+const A3 = 220;
+const C4 = 261.63;
+const D4 = 293.66;
+const E4 = 329.63;
+const G4 = 392;
+const A4 = 440;
 
 
 
 
 
+//osc1.type = osc2.type = osc3.type = osc4.type = osc5.type = osc6.type = 'triangle';
 
 
 /*
-
-
-
-// A minor pentatonic scale
-const root-pitch = 220;
-const third-pitch = 261.63;
-const fourth-pitch = 293.66;
-const fifth-pitch = 329.63;
-const seventh-pitch = 392;
-const octave-pitch = 440;
-
-
-const osc1 = audioCont.createOscillator();
-const osc2 = audioCont.createOscillator();
-const osc3 = audioCont.createOscillator();
-const osc4 = audioCont.createOscillator();
-const osc5 = audioCont.createOscillator();
-const osc6 = audioCont.createOscillator();
-
-osc1.type = osc2.type = osc3.type = osc4.type = osc5.type = osc6.type = 'square';
-
-osc1.frequency.setValueAtTime(A3, audioCont.currentTime);
-osc2.frequency.setValueAtTime(C4, audioCont.currentTime);
-osc3.frequency.setValueAtTime(D4, audioCont.currentTime);
-osc4.frequency.setValueAtTime(E4, audioCont.currentTime);
-osc5.frequency.setValueAtTime(G4, audioCont.currentTime);
-osc6.frequency.setValueAtTime(A4, audioCont.currentTime);
-
-
-osc1.connect(audioCont.destination);
-osc2.connect(audioCont.destination);
-osc3.connect(audioCont.destination);
-osc4.connect(audioCont.destination);
-osc5.connect(audioCont.destination);
-osc6.connect(audioCont.destination);
+osc1.connect(audioCtx.destination);
+osc2.connect(audioCtx.destination);
+osc3.connect(audioCtx.destination);
+osc4.connect(audioCtx.destination);
+osc5.connect(audioCtx.destination);
+osc6.connect(audioCtx.destination);
+*/
 
 //osc6.start();
 //document.getElementById("osc1").onclick = console.log("Test");
-const osc1_button = document.getElementById("osc1");
-if (osc1_button.addEventListener)
-    osc1_button.addEventListener("click", osc1.start(), false);
-else if (osc1_button.attachEvent)
-    osc1_button.attachEvent('onclick', osc1.start();
+// const osc1button = document.getElementById("r1one");
+/*
+if (osc1button.addEventListener) {
+    osc1button.addEventListener("click", osc1.start(), false);
+} else if (osc1button.attachEvent) {
+    osc1button.attachEvent('onclick', osc1.start());
+}
 */
+// osc1button.addEventListener('click', function onClick() {
+// 	osc1.connect(audioCtx.destination);
+// 	osc1.start();
+// });
+
+// perhaps a better method
+
+// time
+
+let tempo = 60.0;
+const bpmControl = document.querySelector("#bpm");
+const bpmValEl = document.querySelector("#bpmval");
+
+bpmControl.addEventListener("input",(ev) => {
+	tempo = parseInt(ev.target.value, 10);
+  bpmValEl.innerText = tempo;
+}, false);
+
+const lookahead = 25.0; //how often to call scheduling function in ms
+const scheduleAheadTime = 0.1; //how far ahead to schedule in seconds
+
+let currentNote = 0;
+let nextNoteTime = 0.0;
+let meter = 8; // number of steps in sequencer
+function nextNote() {
+	const secondsPerBeat = 60.0 / tempo;
+	nextNoteTime += secondsPerBeat;
+	currentNote = (currentNote + 1) % meter;
+}
+// oscillators
+
+const sweepLength = 1;
+const releaseTime = 0.5;
+const attackTime = 0.2;
+const sweepEnv = new GainNode(audioCtx);
+
+function playOsc1(time) {
+	const osc1 = new OscillatorNode(audioCtx, {
+		frequency: A3,
+		type: "triangle"
+	});
+	// sweepEnv.gain.cancelScheduledValues(time);
+	// sweepEnv.gain.setValueAtTime(0, time);
+	// sweepEnv.gain.linearRampToValueAtTime(1, time + attackTime);
+	// sweepEnv.gain.linearRampToValueAtTime(
+	// 	0,
+	//   time + sweepLength - releaseTime
+	// );
+	// osc1.connect(sweepEnv).connect(audioCtx.destination);
+	osc1.connect(audioCtx.destination);
+	osc1.start(time);
+	osc1.stop(time + sweepLength);
+}
+function playOsc2(time) {
+	const osc2 = new OscillatorNode(audioCtx, {
+		frequency: C4,
+		type: "triangle"
+	});
+	osc2.connect(audioCtx.destination);
+	osc2.start(time);
+	osc2.stop(time + sweepLength);
+}
+function playOsc3(time) {
+	const osc3 = new OscillatorNode(audioCtx, {
+		frequency: D4,
+		type: "triangle"
+	});
+	osc3.connect(audioCtx.destination);
+	osc3.start(
+		time);
+	osc3.stop(time + sweepLength);
+}
+function playOsc4(time) {
+	const osc4 = new OscillatorNode(audioCtx, {
+		frequency: E4,
+		type: "triangle"
+	});
+	osc4.connect(audioCtx.destination);
+	osc4.start(
+		time);
+	osc4.stop(time + sweepLength);
+}
+function playOsc5(time) {
+	const osc5 = new OscillatorNode(audioCtx, {
+		frequency: G4,
+		type: "triangle"
+	});
+	osc5.connect(audioCtx.destination);
+	osc5.start(
+		time);
+	osc5.stop(time + sweepLength);
+}
+function playOsc6(time) {
+	const osc6 = new OscillatorNode(audioCtx, {
+		frequency: A4,
+		type: "triangle"
+	});
+	osc6.connect(audioCtx.destination);
+	osc6.start(
+		time);
+	osc6.stop(time + sweepLength);
+}
+
+
+const pads = document.querySelectorAll(".pads");
+
+const notesInQueue = [];
+
+function scheduleNote(beatNumber, time) {
+	notesInQueue.push({ note: beatNumber, time: time });
+
+	if (pads[0].querySelectorAll("input")[beatNumber].checked) {
+		playOsc1(time);
+	}
+	if (pads[1].querySelectorAll("input")[beatNumber].checked) {
+		playOsc2(time);
+	}
+	if (pads[2].querySelectorAll("input")[beatNumber].checked) {
+		playOsc3(time);
+	}
+	if (pads[3].querySelectorAll("input")[beatNumber].checked) {
+		playOsc4(time);
+	}
+	if (pads[4].querySelectorAll("input")[beatNumber].checked) {
+		playOsc5(time);
+	}
+	if (pads[5].querySelectorAll("input")[beatNumber].checked) {
+		playOsc6(time);
+	}
+}
+
+let timerID;
+function scheduler() {
+	while (nextNoteTime < audioCtx.currentTime + scheduleAheadTime) {
+		scheduleNote(currentNote, nextNoteTime);
+		nextNote();
+	}
+	timerID = setTimeout(scheduler, lookahead);
+}
+
+let lastNoteDrawn = 3;
+function draw() {
+	let drawNote = lastNoteDrawn;
+  const currentTime = audioCtx.currentTime;
+  while (notesInQueue.length && notesInQueue[0].time < currentTime) {
+    drawNote = notesInQueue[0].note;
+    notesInQueue.shift();
+  }
+  if (lastNoteDrawn !== drawNote) {
+    pads.forEach((pad) => {
+      pad.children[lastNoteDrawn * 2].style.borderColor = "var(--other)";
+      pad.children[drawNote * 2].style.borderColor = "var(--green)";
+    });
+    lastNoteDrawn = drawNote;
+  }
+  requestAnimationFrame(draw);
+}
+
+const playButton = document.querySelector("#playBtn");
+let isPlaying = false;
+
+playButton.addEventListener("click", (ev) => {
+	isPlaying = !isPlaying;
+
+	if (isPlaying) {
+		if (audioCtx.state === "suspended") {
+			audioCtx.resume();
+		}
+		currentNote = 0;
+		nextNoteTime = audioCtx.currentTime;
+		scheduler();
+		requestAnimationFrame(draw);
+		ev.target.dataset.playing = "true";
+	} else {
+		clearTimeout(timerID);
+		ev.target.dataset.playing = "false";
+	}
+});

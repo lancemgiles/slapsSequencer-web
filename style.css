@@ -1,18 +1,78 @@
-#volume-control {
+:root {
+  --text: #FDFFF7;
+  --bg: #595A4A;
+  --green: #81E979;
+  --hover: #363635;
+  --other: #8FBB99;
+  --brightGreen: #B0FE76;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+	background-color: var(--bg);
+	color: var(--text);
+}
+
+#controls {
 	display: grid;
 	justify-items: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
-
-.row {
-    
+#sliders {
+  display: flex;
 }
 
-.note {
-    height: 40px;
-    width: 40px;
-    border-radius: 50%;
-    display: inline-block;
-    background-color: white;
-    border: solid salmon 5px;
+.container {
+  display: flex;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: var(--bg);
+  border: solid var(--green) 2px;
+  border-radius: 50%;
+}
+
+.container:hover input ~ .checkmark {
+  background-color: var(--hover);
+}
+
+.container input:checked ~ .checkmark {
+  background-color: var(--green);
+}
+
+.pads {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem;
+}
+
+.pads p {
+  display: none;
 }
