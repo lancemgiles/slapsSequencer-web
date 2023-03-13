@@ -1,3 +1,9 @@
+/*
+	to do:
+	-fix animation so see which step things are on
+	-add functionality to bpm slider
+	*/
+
 console.clear();
 
 //setup
@@ -11,21 +17,6 @@ volumeControl.addEventListener('input', function() {
 	gainNode.gain.value = this.value;
 }, false);
 
-
-//buttons
-/*
- theses should:
- * change color when clicked,
- * turn that interval on or off in the sequence
- * when that part of the sequence is reached, remove the border if the sequencer is on
-
- * so
- * there should be a function either for every note or each kind of beat that just changes the color of the button clicked
- * another function that turns on that beat of the sequencer on for the oscillator row the button is in
- * another function that is applied to every on button when the sequencer plays that note for the animation
-
- */
-
 // A minor pentatonic scale
 const A3 = 220;
 const C4 = 261.63;
@@ -34,41 +25,7 @@ const E4 = 329.63;
 const G4 = 392;
 const A4 = 440;
 
-
-
-
-
-//osc1.type = osc2.type = osc3.type = osc4.type = osc5.type = osc6.type = 'triangle';
-
-
-/*
-osc1.connect(audioCtx.destination);
-osc2.connect(audioCtx.destination);
-osc3.connect(audioCtx.destination);
-osc4.connect(audioCtx.destination);
-osc5.connect(audioCtx.destination);
-osc6.connect(audioCtx.destination);
-*/
-
-//osc6.start();
-//document.getElementById("osc1").onclick = console.log("Test");
-// const osc1button = document.getElementById("r1one");
-/*
-if (osc1button.addEventListener) {
-    osc1button.addEventListener("click", osc1.start(), false);
-} else if (osc1button.attachEvent) {
-    osc1button.attachEvent('onclick', osc1.start());
-}
-*/
-// osc1button.addEventListener('click', function onClick() {
-// 	osc1.connect(audioCtx.destination);
-// 	osc1.start();
-// });
-
-// perhaps a better method
-
 // time
-
 let tempo = 60.0;
 const bpmControl = document.querySelector("#bpm");
 const bpmValEl = document.querySelector("#bpmval");
@@ -163,9 +120,9 @@ function playOsc6(time) {
 	osc6.stop(time + sweepLength);
 }
 
-
 const pads = document.querySelectorAll(".pads");
 
+// Sequencer
 const notesInQueue = [];
 
 function scheduleNote(beatNumber, time) {
@@ -200,6 +157,7 @@ function scheduler() {
 	timerID = setTimeout(scheduler, lookahead);
 }
 
+// animation
 let lastNoteDrawn = 3;
 function draw() {
 	let drawNote = lastNoteDrawn;
@@ -218,6 +176,7 @@ function draw() {
   requestAnimationFrame(draw);
 }
 
+// playback
 const playButton = document.querySelector("#playBtn");
 let isPlaying = false;
 
