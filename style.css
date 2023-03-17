@@ -1,10 +1,10 @@
 :root {
   --text: #FDFFF7;
   --bg: #595A4A;
-  --green: #81E979;
+  --normal: #81E979;
   --hover: #363635;
   --other: #8FBB99;
-  --brightGreen: #B0FE76;
+  --highlight: #B0FE76;
 }
 
 * {
@@ -55,7 +55,7 @@ body {
   height: 25px;
   width: 25px;
   background-color: var(--bg);
-  border: solid var(--green) 2px;
+  border: solid var(--normal) 2px;
   border-radius: 50%;
 }
 
@@ -64,7 +64,7 @@ body {
 }
 
 .container input:checked ~ .checkmark {
-  background-color: var(--green);
+  background-color: var(--normal);
 }
 
 .pads {

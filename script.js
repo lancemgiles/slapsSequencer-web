@@ -1,8 +1,21 @@
 /*
-	to do:
-	-fix animation so see which step things are on
-	-add functionality to bpm slider
-	*/
+	SLAPS (SLAPS Like A Punk Song) Web Audio Sequencer
+	Copyright (C) 2023, Lance Giles & Dogman Devices
+
+	This program is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 3 of the License, or
+	(at your option) any later version.
+
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 
 console.clear();
 
@@ -32,7 +45,7 @@ const bpmValEl = document.querySelector("#bpmval");
 
 bpmControl.addEventListener("input",(ev) => {
 	tempo = parseInt(ev.target.value, 10);
-  bpmValEl.innerText = tempo;
+  //bpmValEl.innerText = tempo;
 }, false);
 
 const lookahead = 25.0; //how often to call scheduling function in ms
@@ -158,7 +171,7 @@ function scheduler() {
 }
 
 // animation
-let lastNoteDrawn = 3;
+let lastNoteDrawn = meter - 1;
 function draw() {
 	let drawNote = lastNoteDrawn;
   const currentTime = audioCtx.currentTime;
@@ -168,8 +181,8 @@ function draw() {
   }
   if (lastNoteDrawn !== drawNote) {
     pads.forEach((pad) => {
-      pad.children[lastNoteDrawn * 2].style.borderColor = "var(--other)";
-      pad.children[drawNote * 2].style.borderColor = "var(--green)";
+      pad.querySelectorAll(".checkmark")[lastNoteDrawn].style.borderColor = "var(--normal)";
+      pad.querySelectorAll(".checkmark")[drawNote].style.borderColor = "var(--highlight)";
     });
     lastNoteDrawn = drawNote;
   }
